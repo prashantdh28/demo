@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-app
+  labels:
+    app: nginx-app
+spec:
+  replicas: 3 # Number of desired replicas for the Nginx application
+  selector:
+    matchLabels:
+      app: nginx-app
+  template:
+    metadata:
+      labels:
+        app: nginx-app
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest # The Docker image for Nginx, replace with your own image name and version
+          ports:
+            - containerPort: 80 # Port number used by the Nginx application
+          resources:
+            limits:
+              cpu: "0.5" # CPU limit for the Nginx container
+              memory: "512Mi" # Memory limit for the Nginx container
+            requests:
+              cpu: "0.2" # CPU request for the Nginx container
+              memory: "256Mi" # Memory request for the Nginx container
+      imagePullPolicy: Always # Always pull the latest image
