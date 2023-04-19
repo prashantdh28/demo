@@ -6,4 +6,4 @@
  
  EXPOSE 8080
  
- CMD ["nginx"]
+ CMD ["nginx","-g", "daemon off;"]
