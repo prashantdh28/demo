@@ -8,7 +8,7 @@ metadata:
 spec:
   containers:
   - name: kubectl
-    image: joshendriks/alpine-k8s
+    image: bitnami/kubectl
     command:
     - /bin/cat
     tty: true    
