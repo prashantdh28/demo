@@ -8,7 +8,7 @@ metadata:
 spec:
   containers:
   - name: kubectl
-    image: joshendriks/alpine-k8s
+    image: bearengineer/awscli-kubectl
     command:
     - /bin/cat
     tty: true    
@@ -54,12 +54,14 @@ spec:
     stage('Deploy App to Kubernetes') {     
       steps {
         container('kubectl') {
+          withCredentials([string(credentialsId: 'awscred', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'awscred', variable: 'AWS_SECRET_ACCESS_KEY')]){
+            sh 'sh 'aws eks update-kubeconfig --name EKS-CLUSTER --region us-east-2'
           withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
             sh 'export KUBECONFIG=config'
             sh 'kubectl version'
             sh 'cat deployment.yaml'
             sh 'kubectl apply -f deployment.yaml'
-            
+          }
           }
         }
       }
