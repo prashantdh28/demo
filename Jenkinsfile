@@ -54,7 +54,8 @@ spec:
     stage('Deploy App to Kubernetes') {     
       steps {
         container('kubectl') {
-          withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
+          withCredentials([file(credentialsId: '$kubeconfig', variable: 'KUBECONFIG')]) {
+            sh 'export KUBECONFIG=config'
             sh 'kubectl version'
             sh 'cat deployment.yaml'
             sh 'kubectl apply -f deployment.yaml'
