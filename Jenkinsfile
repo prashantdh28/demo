@@ -56,7 +56,9 @@ spec:
         container('kubectl') {
           withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
             sh 'kubectl version'
-            sh 'aws eks update-kubeconfig --name EKS-CLUSTER --region us-east-2'
+            sh 'cat deployment.yaml'
+            sh 'kubectl apply -f deployment.yaml'
+            
           }
         }
       }
