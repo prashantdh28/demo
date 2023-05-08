@@ -55,7 +55,7 @@ spec:
       steps {
         container('kubectl') {
           withCredentials([string(credentialsId: 'awscred', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'awscred', variable: 'AWS_SECRET_ACCESS_KEY')]){
-            sh 'sh 'aws eks update-kubeconfig --name EKS-CLUSTER --region us-east-2'
+            sh 'aws eks update-kubeconfig --name EKS-CLUSTER --region us-east-2'
           withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
             sh 'export KUBECONFIG=config'
             sh 'kubectl version'
