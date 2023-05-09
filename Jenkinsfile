@@ -45,7 +45,7 @@ spec:
                     sh '''
                     /kaniko/executor --dockerfile `pwd`/Dockerfile \
                                      --context `pwd` \
-                                     --destination=prashant28/Nginx-image
+                                     --destination=prashant28/image-1
                     '''
           }
         }
