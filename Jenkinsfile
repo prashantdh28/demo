@@ -55,12 +55,12 @@ spec:
       steps {
         container('kubectl') {
             withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
-          //withCredentials([string(credentialsId: 'awscred', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'awscred', variable: 'AWS_SECRET_ACCESS_KEY')]){
-            sh 'aws configure set aws_access_key_id "AKIA4BSLOBW5YZGXOXHG" && aws configure set aws_secret_access_key "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"  && aws configure set region "us-east-2" && aws configure set output "json"'
+            withCredentials([<object of type com.cloudbees.jenkins.plugins.awscredentials.AmazonWebServicesCredentialsBinding>]) {
+            //sh 'aws configure set aws_access_key_id "AKIA4BSLOBW5YZGXOXHG" && aws configure set aws_secret_access_key "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"  && aws configure set region "us-east-2" && aws configure set output "json"'
             sh 'aws eks update-kubeconfig --name EKS-CLUSTER --region us-east-2'
             sh 'kubectl version'
             sh 'kubectl apply -f deployment.yaml'
-          //}
+            }
           }
         }
       }
